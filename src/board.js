@@ -13,6 +13,11 @@ export default class Board extends React.Component {
   handleSquareClick(i) {
     // Copy the squares array from state
     const squares = this.state.squares.slice();
+    if(calculateWinner(squares) || squares[i]) {
+      // Ignore click if game is over or square is taken
+      return;
+    }
+
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       squares: squares,
