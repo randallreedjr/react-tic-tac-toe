@@ -10,7 +10,7 @@ export default class Board extends React.Component {
     };
   }
 
-  handleClick(i) {
+  handleSquareClick(i) {
     // Copy the squares array from state
     const squares = this.state.squares.slice();
     squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -20,11 +20,18 @@ export default class Board extends React.Component {
     });
   }
 
+  handleComputerMove() {
+    // Make a random move out of the available squares
+    const possibleMoves = this.state.squares.map((square, index) => (square == null ? index : null)).filter((square) => square != null);
+    const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+    this.handleSquareClick(move);
+  }
+
   renderSquare(i) {
     return (
       <Square
         value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
+        onClick={() => this.handleSquareClick(i)}
       />
     );
   }
@@ -50,6 +57,7 @@ export default class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        <button className="computer-move-button" onClick={() => this.handleComputerMove()}>Computer Move</button>
       </div>
     );
   }

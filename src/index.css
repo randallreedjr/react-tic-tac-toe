@@ -48,3 +48,8 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+.computer-move-button {
+  margin-top: 20px;
+  border-radius: 5px;
+}
